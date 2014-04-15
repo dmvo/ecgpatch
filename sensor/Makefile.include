@@ -1,0 +1,16 @@
+PROJECT_ROOT = $(HOME)/project/ecgpatch/sensor
+
+TARGET = arm-none-eabi-
+
+ARCH_DEFINES = -DBLE_STACK_SUPPORT_REQD -DNRF51
+ARCH_FLAGS = -mcpu=cortex-m0 -mthumb
+
+CC = $(TARGET)gcc
+AS = $(TARGET)as
+CP = $(TARGET)objcopy -O ihex
+
+CFLAGS = $(ARCH_DEFINES) $(ARCH_FLAGS)
+CFLAGS += -I$(PROJECT_ROOT)/include/ble -I$(PROJECT_ROOT)/include/s110
+CFLAGS += -I$(PROJECT_ROOT)/include/app_common -I$(PROJECT_ROOT)/include
+CFLAGS += -I$(PROJECT_ROOT)/include/gcc -I$(PROJECT_ROOT)/include/ble/ble_services
+CFLAGS += -I$(PROJECT_ROOT)/include/sd_common
