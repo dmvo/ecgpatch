@@ -1,9 +1,7 @@
-1. Get rid of the nRFgo utility by enabling flashing via GDB.
+1. Add BAS to both the sensor and the iOS application.
 
 2. Add iOS code.
 
-3. Add BAS to both the sensor and the iOS application.
+3. Find out how to implement a button in iOS to switch a boolean in the FW.
 
-4. Find out how to implement a button in iOS to switch a boolean in the FW.
-
-5. Implement recording of data at button press.
+4. Implement recording of data at button press.
