@@ -27,7 +27,7 @@
 #define APP_TIMER_MAX_TIMERS                 3                                          /**< Maximum number of simultaneously created timers. */
 #define APP_TIMER_OP_QUEUE_SIZE              4                                          /**< Size of timer operation queues. */
 
-#define HEART_RATE_MEAS_INTERVAL             APP_TIMER_TICKS(5, APP_TIMER_PRESCALER) /**< Heart rate measurement interval (ticks). */
+#define ADC_MEAS_INTERVAL             APP_TIMER_TICKS(5, APP_TIMER_PRESCALER)
 
 #define MIN_CONN_INTERVAL                    MSEC_TO_UNITS(7.5, UNIT_1_25_MS)
 #define MAX_CONN_INTERVAL                    MSEC_TO_UNITS(35, UNIT_1_25_MS)
@@ -56,7 +56,7 @@ static ble_gap_adv_params_t                  m_adv_params;                      
 static ble_hrs_t                             m_hrs;                                     /**< Structure used to identify the heart rate service. */
 static ble_bas_t                             m_bas;
 
-static app_timer_id_t                        m_heart_rate_timer_id;                     /**< Heart rate measurement timer. */
+static app_timer_id_t                        m_adc_timer_id;
 
 static volatile uint16_t        s_cur_heart_rate;
 
@@ -82,7 +82,7 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
-static void heart_rate_meas_timeout_handler(void *p_context)
+static void adc_meas_timeout_handler(void *p_context)
 {
 	uint32_t hfclk_running = 0;
 
@@ -102,9 +102,9 @@ static void timers_init(void)
 
 	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_MAX_TIMERS, APP_TIMER_OP_QUEUE_SIZE, false);
 
-	err_code = app_timer_create(&m_heart_rate_timer_id,
+	err_code = app_timer_create(&m_adc_timer_id,
 			APP_TIMER_MODE_REPEATED,
-			heart_rate_meas_timeout_handler);
+			adc_meas_timeout_handler);
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -249,7 +249,7 @@ static void application_timers_start(void)
 {
 	uint32_t err_code;
 
-	err_code = app_timer_start(m_heart_rate_timer_id, HEART_RATE_MEAS_INTERVAL, NULL);
+	err_code = app_timer_start(m_adc_timer_id, ADC_MEAS_INTERVAL, NULL);
 	APP_ERROR_CHECK(err_code);
 }
 
