@@ -8,6 +8,7 @@
 #include "ble_hci.h"
 #include "ble_srv_common.h"
 #include "ble_advdata.h"
+#include "ble_bas.h"
 #include "ble_hrs.h"
 #include "ble_conn_params.h"
 #include "softdevice_handler.h"
@@ -53,6 +54,7 @@ static uint16_t                              m_conn_handle = BLE_CONN_HANDLE_INV
 static ble_gap_sec_params_t                  m_sec_params;                              /**< Security requirements for this application. */
 static ble_gap_adv_params_t                  m_adv_params;                              /**< Parameters to be passed to the stack when starting advertising. */
 static ble_hrs_t                             m_hrs;                                     /**< Structure used to identify the heart rate service. */
+static ble_bas_t                             m_bas;
 
 static app_timer_id_t                        m_heart_rate_timer_id;                     /**< Heart rate measurement timer. */
 
@@ -141,7 +143,8 @@ static void advertising_init(void)
 
 	ble_uuid_t adv_uuids[] =
 	{
-		{BLE_UUID_HEART_RATE_SERVICE,         BLE_UUID_TYPE_BLE},
+		{BLE_UUID_HEART_RATE_SERVICE, BLE_UUID_TYPE_BLE},
+		{BLE_UUID_BATTERY_SERVICE, BLE_UUID_TYPE_BLE},
 	};
 
 	// Build and set advertising data.
@@ -171,9 +174,10 @@ static void services_init(void)
 {
 	uint32_t       err_code;
 	ble_hrs_init_t hrs_init;
+	ble_bas_init_t bas_init;
 	uint8_t        body_sensor_location;
 
-	// Initialize Heart Rate Service.
+	/* Initialize Heart Rate Service. */
 	body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;
 
 	memset(&hrs_init, 0, sizeof(hrs_init));
@@ -182,7 +186,7 @@ static void services_init(void)
 	hrs_init.is_sensor_contact_supported = false;
 	hrs_init.p_body_sensor_location      = &body_sensor_location;
 
-	// Here the sec level for the Heart Rate Service can be changed/increased.
+	/* Here the sec level for the Heart Rate Service can be changed/increased. */
 	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&hrs_init.hrs_hrm_attr_md.cccd_write_perm);
 	BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.read_perm);
 	BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_hrm_attr_md.write_perm);
@@ -191,6 +195,23 @@ static void services_init(void)
 	BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&hrs_init.hrs_bsl_attr_md.write_perm);
 
 	err_code = ble_hrs_init(&m_hrs, &hrs_init);
+	APP_ERROR_CHECK(err_code);
+
+	/* Initialize Battery Service */
+	memset(&bas_init, 0, sizeof(bas_init));
+
+	/* Here the sec level for the Battery Service can be changed/increased. */
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&bas_init.battery_level_char_attr_md.cccd_write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&bas_init.battery_level_char_attr_md.read_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_NO_ACCESS(&bas_init.battery_level_char_attr_md.write_perm);
+	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&bas_init.battery_level_report_read_perm);
+
+	bas_init.evt_handler          = NULL;
+	bas_init.support_notification = true;
+	bas_init.p_report_ref         = NULL;
+	bas_init.initial_batt_level   = 100;
+
+	err_code = ble_bas_init(&m_bas, &bas_init);
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -354,9 +375,10 @@ void ADC_IRQHandler(void)
 
 static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 {
-    ble_hrs_on_ble_evt(&m_hrs, p_ble_evt);
-    ble_conn_params_on_ble_evt(p_ble_evt);
-    on_ble_evt(p_ble_evt);
+	ble_bas_on_ble_evt(&m_bas, p_ble_evt);
+	ble_hrs_on_ble_evt(&m_hrs, p_ble_evt);
+	ble_conn_params_on_ble_evt(p_ble_evt);
+	on_ble_evt(p_ble_evt);
 }
 
 static void sys_evt_dispatch(uint32_t sys_evt)
