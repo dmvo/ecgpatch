@@ -5,6 +5,7 @@ OBJECTS = \
 	       ble_conn_params.o \
 	       ble_debug_assert_handler.o \
 	       ble_hrs.o \
+	       ble_bas.o \
 	       ble_srv_common.o
 
 libs:	libble.a($(OBJECTS))
