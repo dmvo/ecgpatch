@@ -178,7 +178,7 @@ static void services_init(void)
 	uint8_t        body_sensor_location;
 
 	/* Initialize Heart Rate Service. */
-	body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_FINGER;
+	body_sensor_location = BLE_HRS_BODY_SENSOR_LOCATION_CHEST;
 
 	memset(&hrs_init, 0, sizeof(hrs_init));
 
