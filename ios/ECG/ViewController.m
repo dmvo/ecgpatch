@@ -525,12 +525,7 @@ didFailToConnectPeripheral:(CBPeripheral *)aPeripheral
         if ([aService.UUID isEqual:[CBUUID UUIDWithString:@"180D"]]) {
             [aPeripheral discoverCharacteristics:nil forService:aService];
         }
-        
-        /* Device Information Service */
-        if ([aService.UUID isEqual:[CBUUID UUIDWithString:@"180A"]]) {
-            [aPeripheral discoverCharacteristics:nil forService:aService];
-        }
-        
+
         /* GAP (Generic Access Profile) for Device Name */
         if ([aService.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]]) {
             [aPeripheral discoverCharacteristics:nil forService:aService];
@@ -551,38 +546,11 @@ didDiscoverCharacteristicsForService:(CBService *)service
                 [self.peripheral setNotifyValue:YES forCharacteristic:aChar];
                 NSLog(@"Found a Heart Rate Measurement Characteristic");
             }
-            
+
             // Read body sensor location
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"2A38"]]) {
                 [aPeripheral readValueForCharacteristic:aChar];
                 NSLog(@"Found a Body Sensor Location Characteristic");
-            }
-            
-            // Write heart rate control point
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"2A39"]]) {
-                uint8_t val = 1;
-                NSData* valData = [NSData dataWithBytes:(void*)&val length:sizeof(val)];
-                [aPeripheral writeValue:valData forCharacteristic:aChar type:CBCharacteristicWriteWithResponse];
-            }
-        }
-    }
-    
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]]) {
-        for (CBCharacteristic *aChar in service.characteristics) {
-            // Read device name
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
-                [aPeripheral readValueForCharacteristic:aChar];
-                NSLog(@"Found a Device Name Characteristic");
-            }
-        }
-    }
-    
-    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180A"]]) {
-        for (CBCharacteristic *aChar in service.characteristics) {
-            // Read manufacturer name
-            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
-                [aPeripheral readValueForCharacteristic:aChar];
-                NSLog(@"Found a Device Manufacturer Name Characteristic");
             }
         }
     }
