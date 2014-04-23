@@ -449,10 +449,6 @@ typedef enum {
       advertisementData:(NSDictionary *)advertisementData
                    RSSI:(NSNumber *)RSSI
 {
-    NSMutableArray *peripherals = [self mutableArrayValueForKey:@"heartRateMonitors"];
-    if(![self.heartRateMonitors containsObject:aPeripheral])
-        [peripherals addObject:aPeripheral];
-    
     // Retrieve already known devices
     [self.manager retrievePeripherals:[NSArray arrayWithObject:(id)aPeripheral.UUID]];
 }
