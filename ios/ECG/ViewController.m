@@ -643,18 +643,6 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             NSLog(@"Body Sensor Location = %@ (%d)", locationString, location);
         }
     }
-    // Value for device Name received
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:CBUUIDDeviceNameString]]) {
-        NSString * deviceName = [[NSString alloc] initWithData:characteristic.value
-                                                      encoding:NSUTF8StringEncoding];
-        NSLog(@"Device Name = %@", deviceName);
-    }
-    // Value for manufacturer name received
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A29"]]) {
-        NSString *manufacturer = [[NSString alloc] initWithData:characteristic.value
-                                                       encoding:NSUTF8StringEncoding];
-        NSLog(@"Manufacturer Name = %@", manufacturer);
-    }
 }
 - (void)dealloc {
     [bpmLabel release];
