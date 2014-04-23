@@ -562,18 +562,17 @@ didDiscoverCharacteristicsForService:(CBService *)service
     const uint8_t *reportData = [data bytes];
     uint16_t bpm;
     uint16_t testi = 0;
-    uint8_t bpm_lenght;
-    
+    uint8_t bpm_length;
     
     if ((reportData[0] & 0x01) == 0) {
         // uint8 bpm
         bpm = reportData[1];
-        bpm_lenght = 1;
+        bpm_length = 1;
 
     } else {
         // uint16 bpm
         bpm = CFSwapInt16LittleToHost(*(uint16_t *)(&reportData[1]));
-        bpm_lenght = 2;
+        bpm_length = 2;
     }
     if (bpm > y_max)
         y_max = bpm;
@@ -581,12 +580,10 @@ didDiscoverCharacteristicsForService:(CBService *)service
         y_min = bpm;
     
     if ((reportData[0] & 0x10) == 0x10) {
-        testi = CFSwapInt16LittleToHost(*(uint16_t *)(&reportData[1 + bpm_lenght]));
+        testi = CFSwapInt16LittleToHost(*(uint16_t *)(&reportData[1 + bpm_length]));
                 NSString *tmp = [NSString stringWithFormat:@"%i bpm", testi];
                 bpmLabel.text = tmp;
     }
-    
-     
     
     NSNumber *sample = [NSNumber numberWithUnsignedInt:bpm];
     
