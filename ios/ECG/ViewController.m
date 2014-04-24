@@ -521,11 +521,6 @@ didFailToConnectPeripheral:(CBPeripheral *)aPeripheral
         if ([aService.UUID isEqual:[CBUUID UUIDWithString:@"180D"]]) {
             [aPeripheral discoverCharacteristics:nil forService:aService];
         }
-
-        /* GAP (Generic Access Profile) for Device Name */
-        if ([aService.UUID isEqual:[CBUUID UUIDWithString:CBUUIDGenericAccessProfileString]]) {
-            [aPeripheral discoverCharacteristics:nil forService:aService];
-        }
     }
 }
 
