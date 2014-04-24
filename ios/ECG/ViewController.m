@@ -107,11 +107,8 @@ typedef enum {
     
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     
-    
     if ((toInterfaceOrientation == UIInterfaceOrientationPortrait) || (toInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)) {
-        //bpmLabel.alpha = 1.0;
 
-        
         CGRect rect = self.graphView.frame;
         rect.origin.y = 88;
         rect.origin.x = 0;
@@ -129,10 +126,10 @@ typedef enum {
         statusLabel.font = [statusLabel.font fontWithSize:17];
         
         rect = self.bpmLabel.frame;
-        rect.origin.y = 351;
-        rect.origin.x = 73;
-        rect.size.width = 174;
-        rect.size.height = 69;
+        rect.origin.y = 330;
+        rect.origin.x = 20;
+        rect.size.width = 100;
+        rect.size.height = 30;
         self.bpmLabel.frame = rect;
         
         rect = self.startButton.frame;
