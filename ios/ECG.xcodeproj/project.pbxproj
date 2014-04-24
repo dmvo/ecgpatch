@@ -34,8 +34,6 @@
 		4B797D1B183F467500840214 /* Tampere_Vaaka.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D13183F467500840214 /* Tampere_Vaaka.png */; };
 		4B797D1C183F467500840214 /* Vaaka_Start-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D14183F467500840214 /* Vaaka_Start-568h@2x.png */; };
 		4B797D1D183F467500840214 /* Vaaka_Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D15183F467500840214 /* Vaaka_Stop.png */; };
-		4B797D1F183F517900840214 /* Bpm_tausta_pysty.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D1E183F517900840214 /* Bpm_tausta_pysty.png */; };
-		4B797D21183F544600840214 /* Bpm_tausta_pysty1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D20183F544600840214 /* Bpm_tausta_pysty1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,8 +158,6 @@
 		4B797D13183F467500840214 /* Tampere_Vaaka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tampere_Vaaka.png; sourceTree = "<group>"; };
 		4B797D14183F467500840214 /* Vaaka_Start-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vaaka_Start-568h@2x.png"; sourceTree = "<group>"; };
 		4B797D15183F467500840214 /* Vaaka_Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vaaka_Stop.png; sourceTree = "<group>"; };
-		4B797D1E183F517900840214 /* Bpm_tausta_pysty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bpm_tausta_pysty.png; sourceTree = "<group>"; };
-		4B797D20183F544600840214 /* Bpm_tausta_pysty1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bpm_tausta_pysty1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,8 +242,6 @@
 			children = (
 				4B797D0E183F467500840214 /* Metropolia_pysty.png */,
 				4B797D0F183F467500840214 /* Metropolia_vaaka.png */,
-				4B797D1E183F517900840214 /* Bpm_tausta_pysty.png */,
-				4B797D20183F544600840214 /* Bpm_tausta_pysty1.png */,
 				4B797D10183F467500840214 /* Pysty_Start.png */,
 				4B797D11183F467500840214 /* Pysty_stop.png */,
 				4B797D12183F467500840214 /* Tampere_Pysty.png */,
@@ -446,9 +440,7 @@
 				4B797D18183F467500840214 /* Pysty_Start.png in Resources */,
 				4B797C8C1830CCEB00840214 /* Images.xcassets in Resources */,
 				4B797D1A183F467500840214 /* Tampere_Pysty.png in Resources */,
-				4B797D1F183F517900840214 /* Bpm_tausta_pysty.png in Resources */,
 				4B797C7E1830CCEB00840214 /* InfoPlist.strings in Resources */,
-				4B797D21183F544600840214 /* Bpm_tausta_pysty1.png in Resources */,
 				4B797C871830CCEB00840214 /* Main.storyboard in Resources */,
 				4B797D16183F467500840214 /* Metropolia_pysty.png in Resources */,
 				4B797D17183F467500840214 /* Metropolia_vaaka.png in Resources */,

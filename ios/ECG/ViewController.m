@@ -215,7 +215,6 @@ typedef enum {
     CAGradientLayer * bgLayer = [BackgroundLayer blueGradient:0.5 secondstop:1.0];
     bgLayer.frame = self.view.bounds;
     [self.view.layer insertSublayer:bgLayer atIndex:0];
-    bpmLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Bpm_tausta_pysty1.png"]];
 }
 
 - (void)viewDidLoad
