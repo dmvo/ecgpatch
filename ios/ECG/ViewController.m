@@ -20,6 +20,7 @@ static NSString *const kPlotIdentifier = @"Data Source Plot";
 @property (retain, nonatomic) IBOutlet UILabel *statusLabel;
 @property (retain, nonatomic) IBOutlet CPTGraphHostingView *graphView;
 @property (retain, nonatomic) IBOutlet UILabel *bpmLabel;
+@property (retain, nonatomic) IBOutlet UILabel *batLabel;
 @property (retain, nonatomic) IBOutlet UIButton *startButton;
 @property (retain, nonatomic) IBOutlet UIImageView *metropoliaLogo;
 @property (retain, nonatomic) IBOutlet UIImageView *tutLogo;
@@ -44,7 +45,7 @@ typedef enum {
 } connection_state;
 
 @implementation ViewController
-@synthesize graphView, graph, lineplot, hrmPlotData, currentIndex, statusLabel, bpmLabel, updateTimer, dataTimer, startButton, cState, peripheral, manager, y_max, y_min, metropoliaLogo, tutLogo;
+@synthesize graphView, graph, lineplot, hrmPlotData, currentIndex, statusLabel, bpmLabel, batLabel, updateTimer, dataTimer, startButton, cState, peripheral, manager, y_max, y_min, metropoliaLogo, tutLogo;
 
 - (IBAction)buttonListener
 {
@@ -421,8 +422,9 @@ typedef enum {
 // Request CBCentralManager to scan for heart rate peripherals using service UUID 0x180D
 - (void) startScan
 {
-    [self.manager scanForPeripheralsWithServices:[NSArray arrayWithObject:[CBUUID UUIDWithString:@"180D"]]
-                                         options:nil];
+    [self.manager scanForPeripheralsWithServices:[NSArray arrayWithObjects:  [CBUUID UUIDWithString:@"180D"],
+                                                                            [CBUUID UUIDWithString:@"180F"], nil]
+                                                    options:nil];
 }
 
 // Request CBCentralManager to stop scanning for heart rate peripherals
@@ -521,6 +523,12 @@ didFailToConnectPeripheral:(CBPeripheral *)aPeripheral
         if ([aService.UUID isEqual:[CBUUID UUIDWithString:@"180D"]]) {
             [aPeripheral discoverCharacteristics:nil forService:aService];
         }
+
+        /* Battery service */
+        if ([aService.UUID isEqual:[CBUUID UUIDWithString:@"180F"]]) {
+            [aPeripheral discoverCharacteristics:nil forService:aService];
+            NSLog(@"found battery service");
+        }
     }
 }
 
@@ -543,6 +551,18 @@ didDiscoverCharacteristicsForService:(CBService *)service
                 [aPeripheral readValueForCharacteristic:aChar];
                 NSLog(@"Found a Body Sensor Location Characteristic");
             }
+        }
+    }
+
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"180F"]]) {
+        for (CBCharacteristic *aChar in service.characteristics) {
+
+            // Read battery level
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:@"2A19"]]) {
+                [self.peripheral setNotifyValue:YES forCharacteristic:aChar];
+                NSLog(@"Found a Battery Level Characteristic");
+            }
+
         }
     }
 }
@@ -631,6 +651,15 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
             NSLog(@"Body Sensor Location = %@ (%d)", locationString, location);
         }
     }
+    // Battery level value received
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"2A19"]]) {
+        NSLog(@"Received battery level %@", characteristic.value);
+        uint8_t *batval = (uint8_t *)[characteristic.value bytes];
+        NSLog(@"battery level is %d", batval[0]);
+        NSString *tmp = [NSString stringWithFormat:@"%i %%", batval[0]];
+        NSLog(@"%@", tmp);
+        batLabel.text = tmp;
+    }
 }
 - (void)dealloc {
     [bpmLabel release];
@@ -638,6 +667,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     [startButton release];
     [metropoliaLogo release];
     [tutLogo release];
+    [batLabel release];
     [super dealloc];
 }
 @end
