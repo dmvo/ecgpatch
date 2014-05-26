@@ -9,11 +9,11 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="ZBr-b7-Bgl" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="88" width="320" height="200"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="242"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="0.89884399565898676" blue="0.75559229928913074" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -25,19 +25,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 bpm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H9h-rr-V7h">
-                                <rect key="frame" x="20" y="330" width="100" height="30"/>
+                                <rect key="frame" x="20" y="343" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 %" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lNq-Q8-PMV">
-                                <rect key="frame" x="200" y="330" width="100" height="30"/>
+                                <rect key="frame" x="200" y="343" width="100" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xa7-Lf-ZUI">
-                                <rect key="frame" x="73" y="479" width="174" height="69"/>
+                                <rect key="frame" x="20" y="415" width="110" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Start" image="Pysty_Start.png"/>
@@ -53,13 +53,25 @@
                                 <rect key="frame" x="20" y="88" width="280" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="4AU-bz-IbW">
+                                <rect key="frame" x="191" y="415" width="109" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Record" image="Pysty_Record.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="recordButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="H0S-ds-0JU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bpmLabel" destination="H9h-rr-V7h" id="6Dt-Y6-kZi"/>
                         <outlet property="graphView" destination="ZBr-b7-Bgl" id="nzh-lv-zah"/>
                         <outlet property="metropoliaLogo" destination="PNl-Y3-TYy" id="quw-22-UuT"/>
+                        <outlet property="recordBTN" destination="4AU-bz-IbW" id="fVl-TN-chT"/>
                         <outlet property="startButton" destination="Xa7-Lf-ZUI" id="vix-A0-Ui6"/>
                         <outlet property="statusLabel" destination="Wft-3n-jyv" id="iDI-DL-Gfy"/>
                         <outlet property="tutLogo" destination="kCn-Ht-9kK" id="DXb-Iu-IAs"/>
@@ -71,6 +83,7 @@
     </scenes>
     <resources>
         <image name="Metropolia_pysty.png" width="525" height="265"/>
+        <image name="Pysty_Record.png" width="348" height="138"/>
         <image name="Pysty_Start.png" width="348" height="138"/>
         <image name="Tampere_Pysty.png" width="525" height="265"/>
     </resources>

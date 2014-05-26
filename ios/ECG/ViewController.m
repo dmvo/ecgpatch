@@ -16,19 +16,24 @@ static const double kFrameRate = 25.0;  // frames per second
 static const NSUInteger kMaxDataPoints = 200;
 static NSString *const kPlotIdentifier = @"Data Source Plot";
 
+static bool recording = false;
+
+static int buffer[8192];
+static int idx;
+
 @interface ViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, CPTPlotDataSource>
 @property (retain, nonatomic) IBOutlet UILabel *statusLabel;
 @property (retain, nonatomic) IBOutlet CPTGraphHostingView *graphView;
 @property (retain, nonatomic) IBOutlet UILabel *bpmLabel;
 @property (retain, nonatomic) IBOutlet UILabel *batLabel;
 @property (retain, nonatomic) IBOutlet UIButton *startButton;
+@property (retain, nonatomic) IBOutlet UIButton *recordBTN;
 @property (retain, nonatomic) IBOutlet UIImageView *metropoliaLogo;
 @property (retain, nonatomic) IBOutlet UIImageView *tutLogo;
 @property (retain, nonatomic) CPTGraph *graph;
 @property (retain, nonatomic) CPTScatterPlot *lineplot;
 @property (retain, nonatomic) NSMutableArray *hrmPlotData;
 @property NSUInteger currentIndex;
-@property (nonatomic, strong) NSMutableArray *heartRateMonitors;
 @property (nonatomic, strong) CBCentralManager *manager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
 @property NSTimer *updateTimer;
@@ -36,6 +41,11 @@ static NSString *const kPlotIdentifier = @"Data Source Plot";
 @property NSUInteger cState;
 @property NSUInteger y_min;
 @property NSUInteger y_max;
+
+// logging
+@property (retain, nonatomic) NSMutableArray *bufdata;
+@property NSUInteger bufidx;
+
 @end
 
 typedef enum {
@@ -45,7 +55,7 @@ typedef enum {
 } connection_state;
 
 @implementation ViewController
-@synthesize graphView, graph, lineplot, hrmPlotData, currentIndex, statusLabel, bpmLabel, batLabel, updateTimer, dataTimer, startButton, cState, peripheral, manager, y_max, y_min, metropoliaLogo, tutLogo;
+@synthesize graphView, graph, lineplot, hrmPlotData, currentIndex, statusLabel, bpmLabel, batLabel, updateTimer, dataTimer, startButton, cState, peripheral, manager, y_max, y_min, metropoliaLogo, tutLogo, recordBTN, bufdata, bufidx;
 
 - (IBAction)buttonListener
 {
@@ -53,6 +63,17 @@ typedef enum {
         [self disconnect: true];
     else
         [self connect];
+}
+
+- (IBAction)recordButton:(id)sender {
+    
+    if (!recording) {
+        NSLog(@"starting recoding data");
+        recording = true;
+        bufidx = 0;
+        [recordBTN setImage:[UIImage imageNamed:@"Pysty_Pause.png"] forState:UIControlStateNormal];
+        [recordBTN setEnabled:NO];
+    }
 }
 
 - (void) disconnect: (BOOL) didUserDisconnect {
@@ -114,7 +135,7 @@ typedef enum {
         rect.origin.y = 88;
         rect.origin.x = 0;
         rect.size.width = 320;
-        rect.size.height = 200;
+        rect.size.height = 250;
         self.graphView.frame = rect;
         
         rect = self.statusLabel.frame;
@@ -218,10 +239,23 @@ typedef enum {
     [self.view.layer insertSublayer:bgLayer atIndex:0];
 }
 
+
+- (NSString *) logFilePath
+{
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    return [[path objectAtIndex:0] stringByAppendingPathComponent:@"log2.txt"];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+
+    // logging
+    bufdata = [[NSMutableArray arrayWithCapacity:8192] retain];
+    //end of logging
     
     startButton.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     
@@ -307,7 +341,6 @@ typedef enum {
     plotSpace.xRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromUnsignedInteger(0) length:CPTDecimalFromUnsignedInteger(kMaxDataPoints - 2)];
     plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromUnsignedInteger(0) length:CPTDecimalFromUnsignedInteger(1024)];
     
-    self.heartRateMonitors = [NSMutableArray array];
     cState = DISCONNECTED;
 }
 
@@ -318,8 +351,8 @@ typedef enum {
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *)graph.defaultPlotSpace;
     NSUInteger location       = (currentIndex >= kMaxDataPoints ? currentIndex - kMaxDataPoints + 2 : 0);
     CPTPlotRange *newXRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromUnsignedInteger(location) length:CPTDecimalFromUnsignedInteger(kMaxDataPoints - 2)];
-    
-    if (y_max == 0 && y_min == 1024) {
+
+        if (y_max == 0 && y_min == 1024) {
         prev_y_min = 1024;
         prev_y_max = 0;
     }
@@ -342,22 +375,18 @@ typedef enum {
     [graph reloadData];
 }
 
-- (void)generateData
-{
-    [hrmPlotData removeAllObjects];
-    currentIndex = 0;
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
 {
     return [hrmPlotData count];
 }
+
 
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
@@ -567,6 +596,23 @@ didDiscoverCharacteristicsForService:(CBService *)service
     }
 }
 
+-(void)writeFile:(NSString *)fileName data:(id)data
+
+{
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];
+    //NSString *appFile = [documentsDirectory stringByAppendingPathComponent:fileName];
+    //NSError *error=NULL;
+    
+    //[data writeToFile:appFile atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    
+    //if (error == NULL)
+    //{
+        //Check Error Here. if any.
+    //}
+    
+}
+
 // Update UI with heart rate data received from device
 - (void) updateWithHRMData:(NSData *)data
 {
@@ -597,7 +643,32 @@ didDiscoverCharacteristicsForService:(CBService *)service
     }
     
     NSNumber *sample = [NSNumber numberWithUnsignedInt:bpm];
-    
+
+    if (recording) {
+        
+        // add sample to the array at current position
+
+        [bufdata addObject:sample];
+        bufidx++;
+        
+        if (bufidx == 8192) {
+            recording = false;
+            bufidx = 0;
+            NSString *p = [self logFilePath];
+            NSString *data = [bufdata componentsJoinedByString:@"\n"];
+            [data writeToFile:p atomically:YES encoding:NSUTF8StringEncoding error:nil];
+            NSLog(@"buffer full");
+            // enable button back
+            [recordBTN setImage:[UIImage imageNamed:@"Pysty_Record.png"] forState:UIControlStateNormal];
+            [recordBTN setEnabled:YES];
+        }
+        
+      //   NSString *p = [self logFilePath];
+       // NSString *data = [NSString stringWithFormat:@"%@", sample];
+        //NSLog(@"%@ %@", data, p);
+        //[data writeToFile:p atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+
     [self newData: sample];
 }
 
@@ -668,6 +739,7 @@ didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
     [metropoliaLogo release];
     [tutLogo release];
     [batLabel release];
+    [recordBTN release];
     [super dealloc];
 }
 @end

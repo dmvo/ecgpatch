@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+}
 
 - (IBAction)buttonListener;
 

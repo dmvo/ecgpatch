@@ -34,6 +34,8 @@
 		4B797D1B183F467500840214 /* Tampere_Vaaka.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D13183F467500840214 /* Tampere_Vaaka.png */; };
 		4B797D1C183F467500840214 /* Vaaka_Start-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D14183F467500840214 /* Vaaka_Start-568h@2x.png */; };
 		4B797D1D183F467500840214 /* Vaaka_Stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 4B797D15183F467500840214 /* Vaaka_Stop.png */; };
+		D144651F191E53BB00CBCDA9 /* Pysty_Record.png in Resources */ = {isa = PBXBuildFile; fileRef = D144651E191E53BB00CBCDA9 /* Pysty_Record.png */; };
+		D1446521191E577D00CBCDA9 /* Pysty_Pause.png in Resources */ = {isa = PBXBuildFile; fileRef = D1446520191E577D00CBCDA9 /* Pysty_Pause.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -158,6 +160,8 @@
 		4B797D13183F467500840214 /* Tampere_Vaaka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Tampere_Vaaka.png; sourceTree = "<group>"; };
 		4B797D14183F467500840214 /* Vaaka_Start-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Vaaka_Start-568h@2x.png"; sourceTree = "<group>"; };
 		4B797D15183F467500840214 /* Vaaka_Stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Vaaka_Stop.png; sourceTree = "<group>"; };
+		D144651E191E53BB00CBCDA9 /* Pysty_Record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pysty_Record.png; sourceTree = "<group>"; };
+		D1446520191E577D00CBCDA9 /* Pysty_Pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Pysty_Pause.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,8 @@
 		4B797C7A1830CCEB00840214 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D1446520191E577D00CBCDA9 /* Pysty_Pause.png */,
+				D144651E191E53BB00CBCDA9 /* Pysty_Record.png */,
 				4B797D0E183F467500840214 /* Metropolia_pysty.png */,
 				4B797D0F183F467500840214 /* Metropolia_vaaka.png */,
 				4B797D10183F467500840214 /* Pysty_Start.png */,
@@ -405,9 +411,12 @@
 		4B797C681830CCEB00840214 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Metropolia;
 				TargetAttributes = {
+					4B797C6F1830CCEB00840214 = {
+						DevelopmentTeam = 5WNH4J4WZP;
+					};
 					4B797C901830CCEB00840214 = {
 						TestTargetID = 4B797C6F1830CCEB00840214;
 					};
@@ -443,6 +452,8 @@
 				4B797C7E1830CCEB00840214 /* InfoPlist.strings in Resources */,
 				4B797C871830CCEB00840214 /* Main.storyboard in Resources */,
 				4B797D16183F467500840214 /* Metropolia_pysty.png in Resources */,
+				D144651F191E53BB00CBCDA9 /* Pysty_Record.png in Resources */,
+				D1446521191E577D00CBCDA9 /* Pysty_Pause.png in Resources */,
 				4B797D17183F467500840214 /* Metropolia_vaaka.png in Resources */,
 				4B797D1D183F467500840214 /* Vaaka_Stop.png in Resources */,
 				4B797D19183F467500840214 /* Pysty_stop.png in Resources */,
@@ -523,7 +534,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -562,7 +572,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -597,15 +606,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECG/ECG-Prefix.pch";
 				INFOPLIST_FILE = "ECG/ECG-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jonilam/Desktop/ECG/ECG,
+					/Users/dmvo/Projects/ecgpatch/ios/ECG,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -616,15 +629,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECG/ECG-Prefix.pch";
 				INFOPLIST_FILE = "ECG/ECG-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/jonilam/Desktop/ECG/ECG,
+					/Users/dmvo/Projects/ecgpatch/ios/ECG,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -632,7 +649,6 @@
 		4B797CA61830CCEB00840214 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ECG.app/ECG";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -655,7 +671,6 @@
 		4B797CA71830CCEB00840214 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ECG.app/ECG";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -690,6 +705,7 @@
 				4B797CA41830CCEB00840214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B797CA51830CCEB00840214 /* Build configuration list for PBXNativeTarget "ECGTests" */ = {
 			isa = XCConfigurationList;
@@ -698,6 +714,7 @@
 				4B797CA71830CCEB00840214 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

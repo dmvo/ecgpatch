@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D14464CF191CFE4800CBCDA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464CE191CFE4800CBCDA9 /* Foundation.framework */; };
+		D14464D1191CFE4800CBCDA9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464D0191CFE4800CBCDA9 /* CoreGraphics.framework */; };
+		D14464D3191CFE4900CBCDA9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464D2191CFE4900CBCDA9 /* UIKit.framework */; };
+		D14464D9191CFE4900CBCDA9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D14464D7191CFE4900CBCDA9 /* InfoPlist.strings */; };
+		D14464DB191CFE4900CBCDA9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D14464DA191CFE4900CBCDA9 /* main.m */; };
+		D14464DF191CFE4900CBCDA9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D14464DE191CFE4900CBCDA9 /* AppDelegate.m */; };
+		D14464E1191CFE4900CBCDA9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D14464E0191CFE4900CBCDA9 /* Images.xcassets */; };
+		D14464E8191CFE4900CBCDA9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464E7191CFE4900CBCDA9 /* XCTest.framework */; };
+		D14464E9191CFE4900CBCDA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464CE191CFE4800CBCDA9 /* Foundation.framework */; };
+		D14464EA191CFE4900CBCDA9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D14464D2191CFE4900CBCDA9 /* UIKit.framework */; };
+		D14464F2191CFE4900CBCDA9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D14464F0191CFE4900CBCDA9 /* InfoPlist.strings */; };
+		D14464F4191CFE4900CBCDA9 /* ECG_ViewerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D14464F3191CFE4900CBCDA9 /* ECG_ViewerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D14464EB191CFE4900CBCDA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D14464C3191CFE4800CBCDA9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D14464CA191CFE4800CBCDA9;
+			remoteInfo = "ECG Viewer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D14464CB191CFE4800CBCDA9 /* ECG Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECG Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14464CE191CFE4800CBCDA9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D14464D0191CFE4800CBCDA9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D14464D2191CFE4900CBCDA9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D14464D6191CFE4900CBCDA9 /* ECG Viewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ECG Viewer-Info.plist"; sourceTree = "<group>"; };
+		D14464D8191CFE4900CBCDA9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D14464DA191CFE4900CBCDA9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D14464DC191CFE4900CBCDA9 /* ECG Viewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECG Viewer-Prefix.pch"; sourceTree = "<group>"; };
+		D14464DD191CFE4900CBCDA9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D14464DE191CFE4900CBCDA9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D14464E0191CFE4900CBCDA9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D14464E6191CFE4900CBCDA9 /* ECG ViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ECG ViewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D14464E7191CFE4900CBCDA9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D14464EF191CFE4900CBCDA9 /* ECG ViewerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ECG ViewerTests-Info.plist"; sourceTree = "<group>"; };
+		D14464F1191CFE4900CBCDA9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D14464F3191CFE4900CBCDA9 /* ECG_ViewerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECG_ViewerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D14464C8191CFE4800CBCDA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464D1191CFE4800CBCDA9 /* CoreGraphics.framework in Frameworks */,
+				D14464D3191CFE4900CBCDA9 /* UIKit.framework in Frameworks */,
+				D14464CF191CFE4800CBCDA9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D14464E3191CFE4900CBCDA9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464E8191CFE4900CBCDA9 /* XCTest.framework in Frameworks */,
+				D14464EA191CFE4900CBCDA9 /* UIKit.framework in Frameworks */,
+				D14464E9191CFE4900CBCDA9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D14464C2191CFE4800CBCDA9 = {
+			isa = PBXGroup;
+			children = (
+				D14464D4191CFE4900CBCDA9 /* ECG Viewer */,
+				D14464ED191CFE4900CBCDA9 /* ECG ViewerTests */,
+				D14464CD191CFE4800CBCDA9 /* Frameworks */,
+				D14464CC191CFE4800CBCDA9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D14464CC191CFE4800CBCDA9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D14464CB191CFE4800CBCDA9 /* ECG Viewer.app */,
+				D14464E6191CFE4900CBCDA9 /* ECG ViewerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D14464CD191CFE4800CBCDA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D14464CE191CFE4800CBCDA9 /* Foundation.framework */,
+				D14464D0191CFE4800CBCDA9 /* CoreGraphics.framework */,
+				D14464D2191CFE4900CBCDA9 /* UIKit.framework */,
+				D14464E7191CFE4900CBCDA9 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D14464D4191CFE4900CBCDA9 /* ECG Viewer */ = {
+			isa = PBXGroup;
+			children = (
+				D14464DD191CFE4900CBCDA9 /* AppDelegate.h */,
+				D14464DE191CFE4900CBCDA9 /* AppDelegate.m */,
+				D14464E0191CFE4900CBCDA9 /* Images.xcassets */,
+				D14464D5191CFE4900CBCDA9 /* Supporting Files */,
+			);
+			path = "ECG Viewer";
+			sourceTree = "<group>";
+		};
+		D14464D5191CFE4900CBCDA9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D14464D6191CFE4900CBCDA9 /* ECG Viewer-Info.plist */,
+				D14464D7191CFE4900CBCDA9 /* InfoPlist.strings */,
+				D14464DA191CFE4900CBCDA9 /* main.m */,
+				D14464DC191CFE4900CBCDA9 /* ECG Viewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D14464ED191CFE4900CBCDA9 /* ECG ViewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				D14464F3191CFE4900CBCDA9 /* ECG_ViewerTests.m */,
+				D14464EE191CFE4900CBCDA9 /* Supporting Files */,
+			);
+			path = "ECG ViewerTests";
+			sourceTree = "<group>";
+		};
+		D14464EE191CFE4900CBCDA9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D14464EF191CFE4900CBCDA9 /* ECG ViewerTests-Info.plist */,
+				D14464F0191CFE4900CBCDA9 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D14464CA191CFE4800CBCDA9 /* ECG Viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D14464F7191CFE4900CBCDA9 /* Build configuration list for PBXNativeTarget "ECG Viewer" */;
+			buildPhases = (
+				D14464C7191CFE4800CBCDA9 /* Sources */,
+				D14464C8191CFE4800CBCDA9 /* Frameworks */,
+				D14464C9191CFE4800CBCDA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ECG Viewer";
+			productName = "ECG Viewer";
+			productReference = D14464CB191CFE4800CBCDA9 /* ECG Viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D14464E5191CFE4900CBCDA9 /* ECG ViewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D14464FA191CFE4900CBCDA9 /* Build configuration list for PBXNativeTarget "ECG ViewerTests" */;
+			buildPhases = (
+				D14464E2191CFE4900CBCDA9 /* Sources */,
+				D14464E3191CFE4900CBCDA9 /* Frameworks */,
+				D14464E4191CFE4900CBCDA9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D14464EC191CFE4900CBCDA9 /* PBXTargetDependency */,
+			);
+			name = "ECG ViewerTests";
+			productName = "ECG ViewerTests";
+			productReference = D14464E6191CFE4900CBCDA9 /* ECG ViewerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D14464C3191CFE4800CBCDA9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Electria;
+				TargetAttributes = {
+					D14464E5191CFE4900CBCDA9 = {
+						TestTargetID = D14464CA191CFE4800CBCDA9;
+					};
+				};
+			};
+			buildConfigurationList = D14464C6191CFE4800CBCDA9 /* Build configuration list for PBXProject "ECG Viewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D14464C2191CFE4800CBCDA9;
+			productRefGroup = D14464CC191CFE4800CBCDA9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D14464CA191CFE4800CBCDA9 /* ECG Viewer */,
+				D14464E5191CFE4900CBCDA9 /* ECG ViewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D14464C9191CFE4800CBCDA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464D9191CFE4900CBCDA9 /* InfoPlist.strings in Resources */,
+				D14464E1191CFE4900CBCDA9 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D14464E4191CFE4900CBCDA9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464F2191CFE4900CBCDA9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D14464C7191CFE4800CBCDA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464DF191CFE4900CBCDA9 /* AppDelegate.m in Sources */,
+				D14464DB191CFE4900CBCDA9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D14464E2191CFE4900CBCDA9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D14464F4191CFE4900CBCDA9 /* ECG_ViewerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D14464EC191CFE4900CBCDA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D14464CA191CFE4800CBCDA9 /* ECG Viewer */;
+			targetProxy = D14464EB191CFE4900CBCDA9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D14464D7191CFE4900CBCDA9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D14464D8191CFE4900CBCDA9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D14464F0191CFE4900CBCDA9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D14464F1191CFE4900CBCDA9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D14464F5191CFE4900CBCDA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D14464F6191CFE4900CBCDA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D14464F8191CFE4900CBCDA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECG Viewer/ECG Viewer-Prefix.pch";
+				INFOPLIST_FILE = "ECG Viewer/ECG Viewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D14464F9191CFE4900CBCDA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECG Viewer/ECG Viewer-Prefix.pch";
+				INFOPLIST_FILE = "ECG Viewer/ECG Viewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D14464FB191CFE4900CBCDA9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ECG Viewer.app/ECG Viewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECG Viewer/ECG Viewer-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ECG ViewerTests/ECG ViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		D14464FC191CFE4900CBCDA9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ECG Viewer.app/ECG Viewer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECG Viewer/ECG Viewer-Prefix.pch";
+				INFOPLIST_FILE = "ECG ViewerTests/ECG ViewerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D14464C6191CFE4800CBCDA9 /* Build configuration list for PBXProject "ECG Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D14464F5191CFE4900CBCDA9 /* Debug */,
+				D14464F6191CFE4900CBCDA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D14464F7191CFE4900CBCDA9 /* Build configuration list for PBXNativeTarget "ECG Viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D14464F8191CFE4900CBCDA9 /* Debug */,
+				D14464F9191CFE4900CBCDA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D14464FA191CFE4900CBCDA9 /* Build configuration list for PBXNativeTarget "ECG ViewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D14464FB191CFE4900CBCDA9 /* Debug */,
+				D14464FC191CFE4900CBCDA9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D14464C3191CFE4800CBCDA9 /* Project object */;
+}
