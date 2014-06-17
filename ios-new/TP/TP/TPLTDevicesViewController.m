@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Electria. All rights reserved.
 //
 
-#import "TPLTFirstViewController.h"
+#import "TPLTDevicesViewController.h"
+#import "TPLTRealTimeViewController.h"
 #import "TPLTVisibleDevices.h"
 
-@interface TPLTFirstViewController ()
+@interface TPLTDevicesViewController ()
 
 @property (strong, nonatomic) TPLTVisibleDevices *visibleDevices;
 @property (strong, nonatomic) NSMutableArray *devicesFound;
@@ -23,12 +24,12 @@
 
 @end
 
-@implementation TPLTFirstViewController
+@implementation TPLTDevicesViewController
 
 - (void) restartScanning
 {
     _visibleDevices = [[TPLTVisibleDevices alloc] init];
-    _visibleDevices.delegate = self;
+    _visibleDevices.delegateVisibleDevices = self;
     self.deviceToConnect = 0;
     self.devicesFound = [[NSMutableArray alloc] init];
     [self.devicesPickerView reloadAllComponents];
@@ -154,5 +155,21 @@
     } else {
         return @"No sensors found";
     }
+}
+
+- (void) bpmReceived:(uint16_t)bpm
+{
+    NSArray *viewContollers = [self.tabBarController viewControllers];
+    TPLTRealTimeViewController *rtvc = [viewContollers objectAtIndex:1];
+    
+    [rtvc setBPM: bpm];
+}
+
+- (void) sampleReceived: (NSNumber *)sample
+{
+    NSArray *viewContollers = [self.tabBarController viewControllers];
+    TPLTRealTimeViewController *rtvc = [viewContollers objectAtIndex:1];
+
+    [rtvc gotSample:sample];
 }
 @end

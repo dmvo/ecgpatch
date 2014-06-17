@@ -32,8 +32,6 @@
 - (void) centralManagerDidUpdateState:(CBCentralManager *)central
 {
     NSLog(@"%@", central);
-    
-    // scan for available devices
     [_centralManager scanForPeripheralsWithServices:nil options:nil];
 }
 
@@ -43,7 +41,7 @@
                    RSSI:(NSNumber *)RSSI
 {
     NSLog(@"discovered peripheral: %@ RSSI %@", peripheral, RSSI);
-    [self.delegate deviceDetected: peripheral];
+    [self.delegateVisibleDevices deviceDetected: peripheral];
 }
 
 - (void) stopScan
@@ -64,7 +62,7 @@
 -(void) centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"Connected to %@", peripheral);
-    [self.delegate deviceConnected: peripheral];
+    [self.delegateVisibleDevices deviceConnected: peripheral];
     peripheral.delegate = self;
     [peripheral discoverServices:nil];
 }
@@ -76,7 +74,7 @@
 
 - (void) centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
 {
-    [self.delegate deviceDisconnected:peripheral];
+    [self.delegateVisibleDevices deviceDisconnected:peripheral];
 }
 
 - (void) peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
@@ -147,6 +145,46 @@
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    //NSLog(@"%@", characteristic.value);
+    // This is SHIT SHIT SHIT: we blatantly misuse the Heart Rate profile,
+    // because it is intended to transmit BPM data, not samples in real time.
+    //
+    // All this shit needs to be rewritten completely for the product:
+    //      o use BTLE alert profile to start/stop real-time data
+    //      o use UART profile from Nordic to send/receive real-time data
+    //      o use the HR profile exactly for what it is intended for:
+    //        fucking BPM values, AND NOTHING ELSE!!!!!11111
+
+    NSData *data = (NSData *) characteristic.value;
+    
+    const uint8_t *reportedData = [data bytes];
+    uint8_t bpm_length;
+    uint16_t bpm;
+
+    if ((reportedData[0] & 0x01) == 0) {
+        // uint8 bpm
+        bpm = reportedData[1];
+        bpm_length = 1;
+        
+    } else {
+        // uint16 bpm
+        bpm = CFSwapInt16LittleToHost(*(uint16_t *)(&reportedData[1]));
+        bpm_length = 2;
+    }
+    
+    if ((reportedData[0] & 0x10) == 0x10) {
+        uint16_t tmp_bpm;
+        
+        tmp_bpm = CFSwapInt16LittleToHost(*(uint16_t *)(&reportedData[1 + bpm_length]));
+
+        // Tell that we received a new BPM value to the
+        // view controller that knows about us. That view controller
+        // will then update some lebel somewhere, most probably NOT
+        // on itself.
+        
+        [self.delegateVisibleDevices bpmReceived:tmp_bpm];
+    }
+    
+    NSNumber *sample = [NSNumber numberWithUnsignedInt:bpm];
+    [self.delegateVisibleDevices sampleReceived:sample];
 }
 @end

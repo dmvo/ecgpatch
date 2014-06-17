@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "TPLTVisibleDevices.h"
 
-@interface TPLTFirstViewController : UIViewController <UIPickerViewDelegate,
+@interface TPLTDevicesViewController : UIViewController <UIPickerViewDelegate,
                                                         UIPickerViewDataSource,
-                                                        TPLTVisibleDesicesDelegate>
+                                                        TPLTDeviceSearch>
 
 @end

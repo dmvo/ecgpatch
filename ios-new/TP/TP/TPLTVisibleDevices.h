@@ -10,7 +10,7 @@
 #import <CoreBluetooth/CoreBluetooth.h>
 
 // Protocol definition starts here
-@protocol TPLTVisibleDesicesDelegate <NSObject>
+@protocol TPLTDeviceSearch <NSObject>
 @required
 
 // These methods will be implemented in another class and called from
@@ -19,6 +19,8 @@
 - (void) deviceDetected: (CBPeripheral *) peripheral;
 - (void) deviceConnected: (CBPeripheral *) peripheral;
 - (void) deviceDisconnected: (CBPeripheral *) peripheral;
+- (void) bpmReceived: (uint16_t) bpm;
+- (void) sampleReceived: (NSNumber *)sample;
 
 @end
 // Protocol definition ends here
@@ -27,10 +29,11 @@
 
 {
     // Delegate to whom to respond back
-    id <TPLTVisibleDesicesDelegate> _delegate;
+    id <TPLTDeviceSearch> _delegateVisibleDevices;
 }
-@property (strong, nonatomic) id delegate;
+@property (strong, nonatomic) id delegateVisibleDevices;
 
+// These relate to searching devices
 - (void) stopScan;
 - (void) connectToPeripheral:(CBPeripheral *) peripheral;
 - (void) disconnectFromPeripheral:(CBPeripheral *)peripheral;

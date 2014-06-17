@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D17747C7194601A700943B2F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747C41946016C00943B2F /* libCorePlot-CocoaTouch.a */; };
+		D17747C91946020B00943B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747C81946020B00943B2F /* QuartzCore.framework */; };
+		D17747CB1946021B00943B2F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747CA1946021B00943B2F /* Accelerate.framework */; };
 		D1FC142E1934B63600EE374D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC142D1934B63600EE374D /* Foundation.framework */; };
 		D1FC14301934B63600EE374D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC142F1934B63600EE374D /* CoreGraphics.framework */; };
 		D1FC14321934B63600EE374D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC14311934B63600EE374D /* UIKit.framework */; };
@@ -14,8 +17,8 @@
 		D1FC143A1934B63600EE374D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14391934B63600EE374D /* main.m */; };
 		D1FC143E1934B63600EE374D /* TPLTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC143D1934B63600EE374D /* TPLTAppDelegate.m */; };
 		D1FC14411934B63600EE374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1FC143F1934B63600EE374D /* Main.storyboard */; };
-		D1FC14441934B63600EE374D /* TPLTFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14431934B63600EE374D /* TPLTFirstViewController.m */; };
-		D1FC14471934B63600EE374D /* TPLTSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14461934B63600EE374D /* TPLTSecondViewController.m */; };
+		D1FC14441934B63600EE374D /* TPLTDevicesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14431934B63600EE374D /* TPLTDevicesViewController.m */; };
+		D1FC14471934B63600EE374D /* TPLTRealTimeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14461934B63600EE374D /* TPLTRealTimeViewController.m */; };
 		D1FC14491934B63600EE374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1FC14481934B63600EE374D /* Images.xcassets */; };
 		D1FC14501934B63600EE374D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC144F1934B63600EE374D /* XCTest.framework */; };
 		D1FC14511934B63600EE374D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC142D1934B63600EE374D /* Foundation.framework */; };
@@ -28,6 +31,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		D17747C31946016C00943B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		D17747C51946018A00943B2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
 		D1FC14531934B63600EE374D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D1FC14221934B63600EE374D /* Project object */;
@@ -38,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../coreplot-framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		D17747C81946020B00943B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D17747CA1946021B00943B2F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D1FC142A1934B63600EE374D /* TP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FC142D1934B63600EE374D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D1FC142F1934B63600EE374D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -49,10 +69,10 @@
 		D1FC143C1934B63600EE374D /* TPLTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPLTAppDelegate.h; sourceTree = "<group>"; };
 		D1FC143D1934B63600EE374D /* TPLTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPLTAppDelegate.m; sourceTree = "<group>"; };
 		D1FC14401934B63600EE374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D1FC14421934B63600EE374D /* TPLTFirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPLTFirstViewController.h; sourceTree = "<group>"; };
-		D1FC14431934B63600EE374D /* TPLTFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPLTFirstViewController.m; sourceTree = "<group>"; };
-		D1FC14451934B63600EE374D /* TPLTSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPLTSecondViewController.h; sourceTree = "<group>"; };
-		D1FC14461934B63600EE374D /* TPLTSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPLTSecondViewController.m; sourceTree = "<group>"; };
+		D1FC14421934B63600EE374D /* TPLTDevicesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPLTDevicesViewController.h; sourceTree = "<group>"; };
+		D1FC14431934B63600EE374D /* TPLTDevicesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPLTDevicesViewController.m; sourceTree = "<group>"; };
+		D1FC14451934B63600EE374D /* TPLTRealTimeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TPLTRealTimeViewController.h; sourceTree = "<group>"; };
+		D1FC14461934B63600EE374D /* TPLTRealTimeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPLTRealTimeViewController.m; sourceTree = "<group>"; };
 		D1FC14481934B63600EE374D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D1FC144E1934B63600EE374D /* TPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1FC144F1934B63600EE374D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -72,6 +92,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D17747CB1946021B00943B2F /* Accelerate.framework in Frameworks */,
+				D17747C91946020B00943B2F /* QuartzCore.framework in Frameworks */,
+				D17747C7194601A700943B2F /* libCorePlot-CocoaTouch.a in Frameworks */,
 				D1FC14301934B63600EE374D /* CoreGraphics.framework in Frameworks */,
 				D1FC14321934B63600EE374D /* UIKit.framework in Frameworks */,
 				D1FC142E1934B63600EE374D /* Foundation.framework in Frameworks */,
@@ -91,9 +114,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D17747BE1946016B00943B2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D17747C41946016C00943B2F /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		D1FC14211934B63600EE374D = {
 			isa = PBXGroup;
 			children = (
+				D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */,
 				D1FC14331934B63600EE374D /* TP */,
 				D1FC14551934B63600EE374D /* TPTests */,
 				D1FC142C1934B63600EE374D /* Frameworks */,
@@ -113,6 +145,8 @@
 		D1FC142C1934B63600EE374D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D17747CA1946021B00943B2F /* Accelerate.framework */,
+				D17747C81946020B00943B2F /* QuartzCore.framework */,
 				D1FC142D1934B63600EE374D /* Foundation.framework */,
 				D1FC142F1934B63600EE374D /* CoreGraphics.framework */,
 				D1FC14311934B63600EE374D /* UIKit.framework */,
@@ -129,10 +163,10 @@
 				D1FC143F1934B63600EE374D /* Main.storyboard */,
 				D1FC146B1935D23700EE374D /* TPLTVisibleDevices.h */,
 				D1FC146C1935D23700EE374D /* TPLTVisibleDevices.m */,
-				D1FC14421934B63600EE374D /* TPLTFirstViewController.h */,
-				D1FC14431934B63600EE374D /* TPLTFirstViewController.m */,
-				D1FC14451934B63600EE374D /* TPLTSecondViewController.h */,
-				D1FC14461934B63600EE374D /* TPLTSecondViewController.m */,
+				D1FC14421934B63600EE374D /* TPLTDevicesViewController.h */,
+				D1FC14431934B63600EE374D /* TPLTDevicesViewController.m */,
+				D1FC14451934B63600EE374D /* TPLTRealTimeViewController.h */,
+				D1FC14461934B63600EE374D /* TPLTRealTimeViewController.m */,
 				D1FC14651934BDF800EE374D /* TPLTThirdViewController.h */,
 				D1FC14661934BDF800EE374D /* TPLTThirdViewController.m */,
 				D1FC14681934BE9400EE374D /* TPLTFourthViewController.h */,
@@ -186,6 +220,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D17747C61946018A00943B2F /* PBXTargetDependency */,
 			);
 			name = TP;
 			productName = TP;
@@ -239,6 +274,12 @@
 			mainGroup = D1FC14211934B63600EE374D;
 			productRefGroup = D1FC142B1934B63600EE374D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D17747BE1946016B00943B2F /* Products */;
+					ProjectRef = D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				D1FC14291934B63600EE374D /* TP */,
@@ -246,6 +287,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D17747C41946016C00943B2F /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = D17747C31946016C00943B2F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		D1FC14281934B63600EE374D /* Resources */ = {
@@ -275,9 +326,9 @@
 			files = (
 				D1FC146A1934BE9400EE374D /* TPLTFourthViewController.m in Sources */,
 				D1FC146D1935D23700EE374D /* TPLTVisibleDevices.m in Sources */,
-				D1FC14471934B63600EE374D /* TPLTSecondViewController.m in Sources */,
+				D1FC14471934B63600EE374D /* TPLTRealTimeViewController.m in Sources */,
 				D1FC143E1934B63600EE374D /* TPLTAppDelegate.m in Sources */,
-				D1FC14441934B63600EE374D /* TPLTFirstViewController.m in Sources */,
+				D1FC14441934B63600EE374D /* TPLTDevicesViewController.m in Sources */,
 				D1FC14671934BDF800EE374D /* TPLTThirdViewController.m in Sources */,
 				D1FC143A1934B63600EE374D /* main.m in Sources */,
 			);
@@ -294,6 +345,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		D17747C61946018A00943B2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = D17747C51946018A00943B2F /* PBXContainerItemProxy */;
+		};
 		D1FC14541934B63600EE374D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D1FC14291934B63600EE374D /* TP */;
@@ -408,7 +464,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TP/TP-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../coreplot-framework/**",
+				);
 				INFOPLIST_FILE = "TP/TP-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -424,7 +486,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TP/TP-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../coreplot-framework/**",
+				);
 				INFOPLIST_FILE = "TP/TP-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -490,6 +558,7 @@
 				D1FC14611934B63600EE374D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D1FC14621934B63600EE374D /* Build configuration list for PBXNativeTarget "TPTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +567,7 @@
 				D1FC14641934B63600EE374D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
