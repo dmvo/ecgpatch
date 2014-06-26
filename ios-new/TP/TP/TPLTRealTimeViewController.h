@@ -14,5 +14,6 @@
 
 - (void) setBPM: (uint16_t) bpm;
 - (void) gotSample: (NSNumber *) sample;
+- (void) stopRecord;
 
 @end

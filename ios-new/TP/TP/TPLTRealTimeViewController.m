@@ -7,17 +7,31 @@
 //
 
 #import "TPLTRealTimeViewController.h"
+#import "TPLTDevicesViewController.h"
 #import <math.h>
+#import <time.h>
 
 @interface TPLTRealTimeViewController ()
 
 @property (nonatomic, strong) CPTGraphHostingView *hostView;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *recordingTimer;
 @property (nonatomic) double kFramerate;
 @property (weak, nonatomic) IBOutlet UILabel *bpmLabel;
 @property (nonatomic, strong) NSMutableArray *ecgData;
 @property (nonatomic, strong) NSMutableArray *ecgTime;
 @property (nonatomic, strong) CPTScatterPlot *plot;
+@property (weak, nonatomic) IBOutlet UIProgressView *recordProgressView;
+@property (strong, nonatomic) NSURL *recordFileURL;
+@property (strong, nonatomic) NSString *recordFilePath;
+@property (nonatomic) NSUInteger recordedSeconds;
+@property (weak, nonatomic) IBOutlet UIButton *recordBTN;
+@property (nonatomic, strong) NSMutableArray *ecgRecord;
+
+@property (nonatomic) BOOL recordingInProgress;
+
+// FIXME maybe we will factor this out to another class
+@property (nonatomic, strong) NSString *ecgRecordsPath;
 
 - (void) initPlot;
 - (void) configureHost;
@@ -35,9 +49,21 @@
 @synthesize ecgData;
 @synthesize ecgTime;
 @synthesize plot;
+@synthesize recordingTimer;
+@synthesize recordProgressView;
+@synthesize recordedSeconds;
+@synthesize recordBTN;
+@synthesize recordFilePath;
+@synthesize recordFileURL;
+@synthesize ecgRecord;
+@synthesize recordingInProgress;
+
+// FIXME maybe we will factor this out to another class
+@synthesize ecgRecordsPath;
 
 #define WINDOW  150
-#define FRAMERATE 25
+#define FRAMERATE 20
+#define RECORDING_INTERVAL 30
 
 - (void) viewDidLoad
 {
@@ -53,7 +79,7 @@
     // also, we hardcode the contents
     ecgData = [[NSMutableArray alloc] initWithCapacity:WINDOW];
     for (int i = 0; i < WINDOW; i++) {
-        [ecgData addObject:[NSNumber numberWithInt:i]];
+        [ecgData addObject:[NSNumber numberWithInt:0]];
     }
 
     ecgTime = [[NSMutableArray alloc] initWithCapacity:WINDOW];
@@ -61,7 +87,33 @@
         [ecgTime addObject:[NSNumber numberWithInt:i]];
     }
     
+    recordProgressView.hidden = YES;
+    recordProgressView.progress = 0.0;
+    
+    [self checkECGRecordsPath];
+    
+    recordingInProgress = NO;
 	// Do any additional setup after loading the view, typically from a nib.
+}
+
+// FIXME
+// Maybe we will need to factor this out to a new class
+
+- (void) checkECGRecordsPath
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    ecgRecordsPath = [documentsPath stringByAppendingPathComponent:@"ecg"];
+    NSLog(@"ecg path %@", ecgRecordsPath);
+    
+    // check that the directiry exists and create it if it doesn't
+    if (![fileManager fileExistsAtPath:ecgRecordsPath]) {
+        NSLog(@"ecg dir doesn't exist, creating it");
+        [fileManager createDirectoryAtPath:ecgRecordsPath
+               withIntermediateDirectories:NO
+                                attributes:nil
+                                     error:nil];
+    }
 }
 
 - (void) viewDidAppear:(BOOL) animated
@@ -82,6 +134,84 @@
     plot = nil;
     self.hostView.hostedGraph = nil;
     self.hostView = nil;
+}
+
+- (IBAction)startRecordBtnPressed:(id)sender
+{
+    NSArray *viewContollers = [self.tabBarController viewControllers];
+    TPLTDevicesViewController *dvc = [viewContollers objectAtIndex:0];
+
+    if (!dvc.connectedDevice) {
+        [[[UIAlertView alloc] initWithTitle:@"No connected sensors"
+                                    message:nil
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    } else {
+        if (recordingInProgress)
+            [self stopRecord];
+        else
+            [self startRecord];
+    }
+}
+
+- (void) startRecord
+{
+    NSLog(@"starting recording");
+    
+    // progress meter
+    recordingTimer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                      target:self
+                                                    selector:@selector(recordingProgress:)
+                                                    userInfo:nil repeats:YES];
+    recordedSeconds = 0;
+    [recordProgressView setProgress:0.0];
+    recordProgressView.hidden = NO;
+    
+    // btn
+    [recordBTN setTitle:@"Stop" forState:UIControlStateNormal];
+    [recordBTN setBackgroundColor:[UIColor redColor]];
+    
+    // FIXME maybe this will be factored out to a new class
+    
+    time_t currentTime = time(NULL);
+    NSString *recordFileName = [NSString stringWithFormat:@"%ld.log", currentTime];
+    recordFilePath = [ecgRecordsPath stringByAppendingPathComponent:recordFileName];
+    recordFileURL = [NSURL URLWithString:recordFilePath];
+    ecgRecord = [[NSMutableArray alloc] init];
+    NSLog(@"current record file path is %@", recordFilePath);
+    
+    recordingInProgress = YES;
+}
+
+- (void) recordingProgress: (NSTimer *) theTimer
+{
+    recordedSeconds++;
+    
+    [recordProgressView setProgress:(float)recordedSeconds / (float)RECORDING_INTERVAL];
+    
+    if (recordedSeconds == RECORDING_INTERVAL)
+        [self stopRecord];
+}
+
+- (void) stopRecord
+{
+    recordingInProgress = NO;
+    
+    // btn
+    [recordBTN setTitle:@"Record" forState:UIControlStateNormal];
+    [recordBTN setBackgroundColor:[UIColor greenColor]];
+    
+    // progress meter
+    recordProgressView.hidden = YES;
+    [recordingTimer invalidate];
+    recordedSeconds = 0;
+    
+    NSString *ecgDataToDump = [ecgRecord componentsJoinedByString:@"\n"];
+    NSError *error;
+    [ecgDataToDump writeToFile:recordFilePath atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (error)
+        NSLog(@"error writing string: %@", error);
 }
 
 - (NSUInteger) numberOfRecordsForPlot:(CPTPlot *)plot
@@ -121,7 +251,7 @@
     bounds = CGRectMake(bounds.origin.x,
                         bounds.origin.y,
                         bounds.size.width,
-                        bounds.size.height - self.tabBarController.tabBar.frame.size.height);
+                        bounds.size.height - self.tabBarController.tabBar.frame.size.height - 100);
     self.hostView = [[CPTGraphHostingView alloc] initWithFrame:bounds];
     [self.view addSubview:self.hostView];
 }
@@ -130,9 +260,9 @@
 {
     CPTGraph *graph = [[CPTXYGraph alloc] initWithFrame:self.hostView.bounds];
 
-    graph.plotAreaFrame.paddingTop    = 15.0;
-    graph.plotAreaFrame.paddingRight  = 15.0;
-    graph.plotAreaFrame.paddingBottom = 125.0;
+    graph.plotAreaFrame.paddingTop    = 5.0;
+    graph.plotAreaFrame.paddingRight  = 10.0;
+    graph.plotAreaFrame.paddingBottom = 22.0;
     graph.plotAreaFrame.paddingLeft   = 5.0;
 
     CPTXYAxisSet *as = (CPTXYAxisSet *)graph.axisSet;
@@ -159,6 +289,12 @@
 
 - (void) refreshECGPlot: (NSTimer *) timer
 {
+    // TEST THE MAX AND MIN
+    //NSNumber *max = [ecgData valueForKeyPath:@"@max.intValue"];
+    //NSNumber *min = [ecgData valueForKeyPath:@"@min.intValue"];
+    //NSLog(@"min is %@ max is %@", min, max);
+    // END OF TESTING THE MAX AND MIN
+    
     CPTGraph *p = self.hostView.hostedGraph;
     [p reloadData];
 }
@@ -171,8 +307,14 @@
 - (void) gotSample:(NSNumber *)sample
 {
     //NSLog(@"in real time view controller received a sample: %@", sample);
+    
     [ecgData removeObjectAtIndex:0];
     [ecgData insertObject:sample atIndex:(WINDOW - 1)];
+
+    if (recordingInProgress) {
+        NSString *sampleString = [NSString stringWithFormat:@"%@", sample];
+        [ecgRecord addObject:sampleString];
+    }
 }
 
 - (void) didReceiveMemoryWarning

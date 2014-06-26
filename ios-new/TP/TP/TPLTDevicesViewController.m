@@ -20,7 +20,6 @@
 @property (strong) NSTimer *connectionTimedOutTimer;
 @property (weak, nonatomic) IBOutlet UILabel *whereWeAreConnectedLabel;
 @property (weak, nonatomic) IBOutlet UIButton *connectButton;
-@property (weak, nonatomic) CBPeripheral *connectedDevice;
 
 @end
 
@@ -28,6 +27,7 @@
 
 - (void) restartScanning
 {
+    self.connectedDevice = nil;
     _visibleDevices = [[TPLTVisibleDevices alloc] init];
     _visibleDevices.delegateVisibleDevices = self;
     self.deviceToConnect = 0;
@@ -37,7 +37,6 @@
     [self.whereWeAreConnectedLabel setText:@"Not connected"];
     [self.connectButton setBackgroundColor:[UIColor greenColor]];
     [self.connectButton setTitle:@"Connect" forState:UIControlStateNormal];
-    self.connectedDevice = nil;
 }
 
 - (void) viewDidLoad
@@ -135,6 +134,11 @@
 
 - (void) deviceDisconnected: (CBPeripheral *)peripheral
 {
+    NSArray *viewContollers = [self.tabBarController viewControllers];
+    TPLTRealTimeViewController *rtvc = [viewContollers objectAtIndex:1];
+    
+    [rtvc stopRecord];
+
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection lost"
                                                     message:[NSString stringWithFormat:@"Sensor %@ disconnected", peripheral.name]
                                                    delegate:nil

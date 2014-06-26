@@ -13,4 +13,6 @@
                                                         UIPickerViewDataSource,
                                                         TPLTDeviceSearch>
 
+@property (weak, nonatomic) CBPeripheral *connectedDevice;
+
 @end

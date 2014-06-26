@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D109D304195194BA0031B664 /* TPLTEcgRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D109D303195194BA0031B664 /* TPLTEcgRecordsViewController.m */; };
+		D109D307195858CF0031B664 /* TPLTRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D109D306195858CF0031B664 /* TPLTRecordViewController.m */; };
 		D17747C7194601A700943B2F /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747C41946016C00943B2F /* libCorePlot-CocoaTouch.a */; };
 		D17747C91946020B00943B2F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747C81946020B00943B2F /* QuartzCore.framework */; };
 		D17747CB1946021B00943B2F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17747CA1946021B00943B2F /* Accelerate.framework */; };
@@ -25,8 +27,6 @@
 		D1FC14521934B63600EE374D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1FC14311934B63600EE374D /* UIKit.framework */; };
 		D1FC145A1934B63600EE374D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D1FC14581934B63600EE374D /* InfoPlist.strings */; };
 		D1FC145C1934B63600EE374D /* TPTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC145B1934B63600EE374D /* TPTests.m */; };
-		D1FC14671934BDF800EE374D /* TPLTThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14661934BDF800EE374D /* TPLTThirdViewController.m */; };
-		D1FC146A1934BE9400EE374D /* TPLTFourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC14691934BE9400EE374D /* TPLTFourthViewController.m */; };
 		D1FC146D1935D23700EE374D /* TPLTVisibleDevices.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FC146C1935D23700EE374D /* TPLTVisibleDevices.m */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D109D302195194BA0031B664 /* TPLTEcgRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLTEcgRecordsViewController.h; sourceTree = "<group>"; };
+		D109D303195194BA0031B664 /* TPLTEcgRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLTEcgRecordsViewController.m; sourceTree = "<group>"; };
+		D109D305195858CF0031B664 /* TPLTRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLTRecordViewController.h; sourceTree = "<group>"; };
+		D109D306195858CF0031B664 /* TPLTRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLTRecordViewController.m; sourceTree = "<group>"; };
 		D17747BD1946016B00943B2F /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../coreplot-framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		D17747C81946020B00943B2F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D17747CA1946021B00943B2F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -79,10 +83,6 @@
 		D1FC14571934B63600EE374D /* TPTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TPTests-Info.plist"; sourceTree = "<group>"; };
 		D1FC14591934B63600EE374D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D1FC145B1934B63600EE374D /* TPTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TPTests.m; sourceTree = "<group>"; };
-		D1FC14651934BDF800EE374D /* TPLTThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLTThirdViewController.h; sourceTree = "<group>"; };
-		D1FC14661934BDF800EE374D /* TPLTThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLTThirdViewController.m; sourceTree = "<group>"; };
-		D1FC14681934BE9400EE374D /* TPLTFourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLTFourthViewController.h; sourceTree = "<group>"; };
-		D1FC14691934BE9400EE374D /* TPLTFourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLTFourthViewController.m; sourceTree = "<group>"; };
 		D1FC146B1935D23700EE374D /* TPLTVisibleDevices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPLTVisibleDevices.h; sourceTree = "<group>"; };
 		D1FC146C1935D23700EE374D /* TPLTVisibleDevices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPLTVisibleDevices.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,10 +167,10 @@
 				D1FC14431934B63600EE374D /* TPLTDevicesViewController.m */,
 				D1FC14451934B63600EE374D /* TPLTRealTimeViewController.h */,
 				D1FC14461934B63600EE374D /* TPLTRealTimeViewController.m */,
-				D1FC14651934BDF800EE374D /* TPLTThirdViewController.h */,
-				D1FC14661934BDF800EE374D /* TPLTThirdViewController.m */,
-				D1FC14681934BE9400EE374D /* TPLTFourthViewController.h */,
-				D1FC14691934BE9400EE374D /* TPLTFourthViewController.m */,
+				D109D302195194BA0031B664 /* TPLTEcgRecordsViewController.h */,
+				D109D303195194BA0031B664 /* TPLTEcgRecordsViewController.m */,
+				D109D305195858CF0031B664 /* TPLTRecordViewController.h */,
+				D109D306195858CF0031B664 /* TPLTRecordViewController.m */,
 				D1FC14481934B63600EE374D /* Images.xcassets */,
 				D1FC14341934B63600EE374D /* Supporting Files */,
 			);
@@ -324,12 +324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1FC146A1934BE9400EE374D /* TPLTFourthViewController.m in Sources */,
+				D109D307195858CF0031B664 /* TPLTRecordViewController.m in Sources */,
 				D1FC146D1935D23700EE374D /* TPLTVisibleDevices.m in Sources */,
+				D109D304195194BA0031B664 /* TPLTEcgRecordsViewController.m in Sources */,
 				D1FC14471934B63600EE374D /* TPLTRealTimeViewController.m in Sources */,
 				D1FC143E1934B63600EE374D /* TPLTAppDelegate.m in Sources */,
 				D1FC14441934B63600EE374D /* TPLTDevicesViewController.m in Sources */,
-				D1FC14671934BDF800EE374D /* TPLTThirdViewController.m in Sources */,
 				D1FC143A1934B63600EE374D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
