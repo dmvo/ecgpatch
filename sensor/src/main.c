@@ -133,8 +133,6 @@ static void gap_params_init(void)
 
 	err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
 	APP_ERROR_CHECK(err_code);
-
-	sd_ble_gap_tx_power_set(-40);
 }
 
 static void advertising_init(void)
