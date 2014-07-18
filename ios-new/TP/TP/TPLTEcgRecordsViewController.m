@@ -35,9 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSLog(@"Loaded the Records view");
-    
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -52,8 +50,7 @@
     if (![fileManager fileExistsAtPath:ecgRecordsPath]) {
         
         // FIXME GRACEFULLY HANDLE THIS
-        // FOR NOW WE ASSUME WE HAVE THIS DIR
-        
+        // FOR NOW WE ASSUME THIS DIR EXISTS
     }
 }
 

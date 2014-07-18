@@ -27,6 +27,7 @@
 @property (nonatomic) NSUInteger recordedSeconds;
 @property (weak, nonatomic) IBOutlet UIButton *recordBTN;
 @property (nonatomic, strong) NSMutableArray *ecgRecord;
+@property (weak, nonatomic) IBOutlet UILabel *recordedLabel;
 
 @property (nonatomic) BOOL recordingInProgress;
 
@@ -57,13 +58,14 @@
 @synthesize recordFileURL;
 @synthesize ecgRecord;
 @synthesize recordingInProgress;
+@synthesize recordedLabel;
 
 // FIXME maybe we will factor this out to another class
 @synthesize ecgRecordsPath;
 
 #define WINDOW  150
 #define FRAMERATE 20
-#define RECORDING_INTERVAL 30
+#define RECORDING_INTERVAL (60*60*2) // seconds
 
 - (void) viewDidLoad
 {
@@ -168,6 +170,9 @@
     [recordProgressView setProgress:0.0];
     recordProgressView.hidden = NO;
     
+    // label
+    recordedLabel.hidden = NO;
+    
     // btn
     [recordBTN setTitle:@"Stop" forState:UIControlStateNormal];
     [recordBTN setBackgroundColor:[UIColor redColor]];
@@ -184,11 +189,21 @@
     recordingInProgress = YES;
 }
 
+- (NSString *)timeFormatted:(int)totalSeconds
+{    
+    int seconds = totalSeconds % 60;
+    int minutes = (totalSeconds / 60) % 60;
+    int hours = totalSeconds / 3600;
+    
+    return [NSString stringWithFormat:@"recorded %02d:%02d:%02d", hours, minutes, seconds];
+}
+
 - (void) recordingProgress: (NSTimer *) theTimer
 {
     recordedSeconds++;
-    
+
     [recordProgressView setProgress:(float)recordedSeconds / (float)RECORDING_INTERVAL];
+    [recordedLabel setText:[self timeFormatted:recordedSeconds]];
     
     if (recordedSeconds == RECORDING_INTERVAL)
         [self stopRecord];
@@ -206,6 +221,9 @@
     recordProgressView.hidden = YES;
     [recordingTimer invalidate];
     recordedSeconds = 0;
+    
+    // label
+    recordedLabel.hidden = YES;
     
     NSString *ecgDataToDump = [ecgRecord componentsJoinedByString:@"\n"];
     NSError *error;

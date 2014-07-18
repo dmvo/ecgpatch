@@ -1222,6 +1222,7 @@
 				OTHER_CPTLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "CorePlot-CocoaTouch";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SDKROOT = iphoneos7.1;
 				SYMROOT = "$(PROJECT_DIR)/../build";
 			};
 			name = Debug;
@@ -1239,6 +1240,7 @@
 				OTHER_CPTLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
 				PRODUCT_NAME = "CorePlot-CocoaTouch";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SDKROOT = iphoneos7.1;
 				SYMROOT = "$(PROJECT_DIR)/../build";
 				ZERO_LINK = NO;
 			};

@@ -15,8 +15,8 @@
 @property (nonatomic, strong) CPTScatterPlot *plot;
 @property (nonatomic, strong) NSMutableArray *ecgDataNumbers;
 
-@property (nonatomic, strong) NSNumber *max;
-@property (nonatomic, strong) NSNumber *min;
+@property (nonatomic) double max;
+@property (nonatomic) double min;
 
 @end
 
@@ -40,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     NSLog(@"loaded playback view with file name %@", fileName);
 
     // set up label below the graph
@@ -59,12 +59,11 @@
     // get the data from the file and transform it to the type we need for plotting
     NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *ecgRecordsPath = [documentsPath stringByAppendingPathComponent:@"ecg"];
-    NSLog(@"in ECG records path %@", ecgRecordsPath);
+
     fileName = [ecgRecordsPath stringByAppendingPathComponent:fileName];
-    NSLog(@"file name now is %@", fileName);
+
     NSString *ecgData = [NSString stringWithContentsOfFile:fileName encoding:NSUTF8StringEncoding error:nil];
     NSArray *ecgDataArray = [ecgData componentsSeparatedByString:@"\n"];
-    NSLog(@"array with %d components retrieved", [ecgDataArray count]);
 
     ecgDataNumbers = [[NSMutableArray alloc] init]; // FIXME maybe we know capacity already now?
 
@@ -73,19 +72,12 @@
     }
 
     // calculate default ranges
-    max = [ecgDataNumbers valueForKeyPath:@"@max.intValue"];
-    min = [ecgDataNumbers valueForKeyPath:@"@min.intValue"];
-    
-    [self initPlot];
-}
+    max = [[ecgDataNumbers valueForKeyPath:@"@max.intValue"] doubleValue];
+    min = [[ecgDataNumbers valueForKeyPath:@"@min.intValue"] doubleValue];
 
-- (void) resetAction
-{
-    CPTXYPlotSpace *ps = (CPTXYPlotSpace *)self.hostView.hostedGraph.defaultPlotSpace;
-    [ps setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(3000)]];
-    [ps setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(1024)]];
-    
-    NSLog(@"reset pressed");
+    NSLog(@"max = %f, min = %f", max, min);
+
+    [self initPlot];
 }
 
 - (void) initPlot
@@ -117,16 +109,32 @@
     graph.plotAreaFrame.paddingLeft   = 5.0;
     
     CPTXYAxisSet *as = (CPTXYAxisSet *)graph.axisSet;
+    
     as.xAxis.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
+    as.xAxis.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
+    
     as.yAxis.labelingPolicy = CPTAxisLabelingPolicyAutomatic;
     as.yAxis.tickLabelDirection = CPTSignPositive;
+    as.yAxis.axisConstraints = [CPTConstraints constraintWithLowerOffset:0.0];
     
     CPTXYPlotSpace *ps = (CPTXYPlotSpace *)graph.defaultPlotSpace;
-    [ps setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(3000)]];
-    [ps setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(1024)]];
+
+    [ps setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(300)]];
+    [ps setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(min - 0.1 * (max - min)) length:CPTDecimalFromDouble(1.2 * (max - min))]];
+
+    [ps setGlobalXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromUnsignedInteger([ecgDataNumbers count])]];
+    [ps setGlobalYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(0) length:CPTDecimalFromInt(1024)]];
+    
     ps.allowsUserInteraction = YES;
     
     self.hostView.hostedGraph = graph;
+}
+
+- (void) resetAction
+{
+    CPTXYPlotSpace *ps = (CPTXYPlotSpace *)self.hostView.hostedGraph.defaultPlotSpace;
+    [ps setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt(0) length:CPTDecimalFromInt(300)]];
+    [ps setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromDouble(min - 0.1 * (max - min)) length:CPTDecimalFromDouble(1.2 * (max - min))]];
 }
 
 - (void) configureScatterPlot
@@ -148,7 +156,7 @@
 {
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
-            return [NSNumber numberWithInt:idx * 10]; // milliseconds
+            return [NSNumber numberWithUnsignedInteger:idx]; // milliseconds
         case CPTScatterPlotFieldY:
             return [ecgDataNumbers objectAtIndex:idx];
         default:
