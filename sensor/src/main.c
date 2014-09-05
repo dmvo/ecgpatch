@@ -48,8 +48,6 @@
 
 #define DEAD_BEEF                            0xDEADBEEF                                 /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
-#define PRESCALING
-
 static uint16_t                              m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
 static ble_gap_sec_params_t                  m_sec_params;                              /**< Security requirements for this application. */
 static ble_gap_adv_params_t                  m_adv_params;                              /**< Parameters to be passed to the stack when starting advertising. */
@@ -61,6 +59,12 @@ static app_timer_id_t                        m_adc_timer_id;
 static volatile uint16_t        s_cur_heart_rate;
 
 static bool high_precision = false;
+
+#define ADC_ECG_SAMPLE ((ADC_CONFIG_RES_10bit << ADC_CONFIG_RES_Pos) | \
+	(ADC_CONFIG_INPSEL_AnalogInputOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) | \
+	(ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) | \
+	(ADC_CONFIG_PSEL_AnalogInput2 << ADC_CONFIG_PSEL_Pos) | \
+	(ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos))
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
@@ -231,17 +235,7 @@ static void adc_init(void)
 	NRF_ADC->INTENSET = ADC_INTENSET_END_Msk;   
 	sd_nvic_SetPriority(ADC_IRQn, NRF_APP_PRIORITY_LOW);  
 	sd_nvic_EnableIRQ(ADC_IRQn);
-
-	NRF_ADC->CONFIG = (ADC_CONFIG_RES_10bit << ADC_CONFIG_RES_Pos) |
-#ifdef PRESCALING
-		(ADC_CONFIG_INPSEL_AnalogInputOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) |
-#else
-		(ADC_CONFIG_INPSEL_AnalogInputNoPrescaling << ADC_CONFIG_INPSEL_Pos) |
-#endif
-		(ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) |
-		(ADC_CONFIG_PSEL_AnalogInput2 << ADC_CONFIG_PSEL_Pos) |
-		(ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos);
-
+	NRF_ADC->CONFIG = ADC_ECG_SAMPLE;
 	NRF_ADC->ENABLE = ADC_ENABLE_ENABLE_Enabled;
 }
 
@@ -389,7 +383,7 @@ static void ble_stack_init(void)
 {
 	uint32_t err_code;
 
-	SOFTDEVICE_HANDLER_INIT(/* NRF_CLOCK_LFCLKSRC_RC_250_PPM_4000MS_CALIBRATION  NRF_CLOCK_LFCLKSRC_SYNTH_250_PPM */ NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, false);
+	SOFTDEVICE_HANDLER_INIT(NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, false);
 
 	err_code = softdevice_ble_evt_handler_set(ble_evt_dispatch);
 	APP_ERROR_CHECK(err_code);
