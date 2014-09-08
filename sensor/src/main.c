@@ -58,12 +58,16 @@ static app_timer_id_t                        m_adc_timer_id;
 
 static volatile uint16_t        s_cur_heart_rate;
 
-static bool high_precision = false;
-
 #define ADC_ECG_SAMPLE ((ADC_CONFIG_RES_10bit << ADC_CONFIG_RES_Pos) | \
 	(ADC_CONFIG_INPSEL_AnalogInputOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) | \
 	(ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) | \
 	(ADC_CONFIG_PSEL_AnalogInput2 << ADC_CONFIG_PSEL_Pos) | \
+	(ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos))
+
+#define ADC_BAT_SAMPLE ((ADC_CONFIG_RES_8bit << ADC_CONFIG_RES_Pos) | \
+	(ADC_CONFIG_INPSEL_SupplyOneThirdPrescaling << ADC_CONFIG_INPSEL_Pos) | \
+	(ADC_CONFIG_REFSEL_VBG << ADC_CONFIG_REFSEL_Pos) | \
+	(ADC_CONFIG_PSEL_Disabled << ADC_CONFIG_PSEL_Pos) | \
 	(ADC_CONFIG_EXTREFSEL_None << ADC_CONFIG_EXTREFSEL_Pos))
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
@@ -88,14 +92,11 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 
 static void adc_meas_timeout_handler(void *p_context)
 {
+	static uint32_t cnt;
 	uint32_t hfclk_running = 0;
 
-	if (high_precision) {
-		sd_clock_hfclk_request();
-
-		while (!hfclk_running)
-			sd_clock_hfclk_is_running(&hfclk_running);
-	}
+	if (!((cnt++) % 200))
+		NRF_ADC->CONFIG = ADC_BAT_SAMPLE;
 
 	NRF_ADC->TASKS_START = 1;
 }
@@ -342,29 +343,43 @@ void ADC_IRQHandler(void)
 	result = NRF_ADC->RESULT;
 	NRF_ADC->TASKS_STOP = 1;
 
-	if (high_precision)
-		sd_clock_hfclk_release();
+	if (NRF_ADC->CONFIG == ADC_BAT_SAMPLE) {
+		// Process the bat status and send it out
+		// [TODO]
+		// bring the config back to "normal" ECG
+		// not to touch it before the next battery
+		// measurement
+		//
+		NRF_ADC->CONFIG = ADC_ECG_SAMPLE;
+		// restart the ADC to take the sample for
+		// Pan-Tompkins
+		NRF_ADC->TASKS_START = 1;
+	} else {
+		delay = QRSDet(result, 0);
 
-	delay = QRSDet(result, 0);
-
-	if (delay) {
-		prev_ticks = ticks;
-		app_timer_cnt_get(&ticks);
-		rr_interval = (60 * APP_TIMER_CLOCK_FREQ) / ((APP_TIMER_PRESCALER + 1) * (ticks - prev_ticks));
-		ble_hrs_rr_interval_add(&m_hrs, rr_interval);
-	}
-
-	if (tosend) {
-		s_cur_heart_rate = result;
-
-		err_code = ble_hrs_heart_rate_measurement_send(&m_hrs, s_cur_heart_rate);
-		if ((err_code != NRF_SUCCESS) && (err_code != NRF_ERROR_INVALID_STATE)
-				&& (err_code != BLE_ERROR_NO_TX_BUFFERS)
-				&& (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)) {
+		if (delay) {
+			prev_ticks = ticks;
+			app_timer_cnt_get(&ticks);
+			rr_interval = (60 * APP_TIMER_CLOCK_FREQ) / ((APP_TIMER_PRESCALER
+						+ 1) * (ticks - prev_ticks));
+			ble_hrs_rr_interval_add(&m_hrs, rr_interval);
 		}
+
+		if (tosend) {
+			s_cur_heart_rate = result;
+
+			err_code = ble_hrs_heart_rate_measurement_send(&m_hrs,
+					s_cur_heart_rate);
+			if ((err_code != NRF_SUCCESS) &&
+					(err_code != NRF_ERROR_INVALID_STATE)
+					&& (err_code != BLE_ERROR_NO_TX_BUFFERS)
+					&& (err_code != BLE_ERROR_GATTS_SYS_ATTR_MISSING)) {
+			}
+		}
+
+		tosend = !tosend;
 	}
 
-	tosend = !tosend;
 }
 
 static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
