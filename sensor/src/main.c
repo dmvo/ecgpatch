@@ -72,22 +72,22 @@ static volatile uint16_t        s_cur_heart_rate;
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
-    // This call can be used for debug purposes during application development.
-    // @note CAUTION: Activating this code will write the stack to flash on an error.
-    //                This function should NOT be used in a final product.
-    //                It is intended STRICTLY for development/debugging purposes.
-    //                The flash write will happen EVEN if the radio is active, thus interrupting
-    //                any communication.
-    //                Use with care. Uncomment the line below to use.
-    // ble_debug_assert_handler(error_code, line_num, p_file_name);
+	// This call can be used for debug purposes during application development.
+	// @note CAUTION: Activating this code will write the stack to flash on an error.
+	//                This function should NOT be used in a final product.
+	//                It is intended STRICTLY for development/debugging purposes.
+	//                The flash write will happen EVEN if the radio is active, thus interrupting
+	//                any communication.
+	//                Use with care. Uncomment the line below to use.
+	// ble_debug_assert_handler(error_code, line_num, p_file_name);
 
-    // On assert, the system can only recover with a reset.
-    NVIC_SystemReset();
+	// On assert, the system can only recover with a reset.
+	NVIC_SystemReset();
 }
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
 {
-    app_error_handler(DEAD_BEEF, line_num, p_file_name);
+	app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
 static void adc_meas_timeout_handler(void *p_context)
