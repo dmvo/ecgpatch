@@ -10,6 +10,7 @@ CC = $(TARGET)gcc
 AS = $(TARGET)as
 AR = $(TARGET)ar
 CP = $(TARGET)objcopy -O ihex
+DB = $(TARGET)gdb
 
 CFLAGS = $(ARCH_DEFINES) $(ARCH_FLAGS) $(GCC_OPTIMIZATION)
 CFLAGS += -I$(PROJECT_ROOT)/include/ble -I$(PROJECT_ROOT)/include/s110
