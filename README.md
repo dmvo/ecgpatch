@@ -10,6 +10,12 @@ good to use as a basis for similar research projects or even
 serve as a basis for commercial products. In the latter case
 we ask to be contacted prioir to use.
 
+Note that not all files in this repository are covered with
+Helsinki Metropolia University of Applied Sciences copyright.
+Some are from the chip vendor, for example, in which case
+there is a note about this in the file itself. Refer to
+the vendor license when copying and using such files.
+
 The source layout is as follows:
 
 board/ : contains Eagle files for the schematics and PCB
