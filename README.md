@@ -21,7 +21,7 @@ The source layout is as follows:
 board/ : contains Eagle files for the schematics and PCB
 
 ios-new/ : sources of the iPhone/iPad app to read data
-  from the sensir patch
+  from the sensor patch
   
 ios/ : legacy iOS code, don't look there
 
